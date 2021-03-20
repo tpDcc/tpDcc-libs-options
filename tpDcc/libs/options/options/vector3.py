@@ -9,7 +9,7 @@ from __future__ import print_function, division, absolute_import
 
 from Qt.QtCore import Qt, Signal
 
-from tpDcc.libs.qt.core import base
+from tpDcc.libs.qt.core import base, qtutils
 from tpDcc.libs.qt.widgets import layouts, label, spinbox
 
 from tpDcc.libs.options.core import option
@@ -59,7 +59,7 @@ class GetVector3FloatWidget(base.BaseWidget, object):
     def ui(self):
         super(GetVector3FloatWidget, self).ui()
 
-        self._label = label.BaseLabel(self._name)
+        self._label = label.BaseLabel(self._name, parent=self)
         self._label.setAlignment(Qt.AlignRight)
         self._label.setMinimumWidth(75)
         self._label.setAttribute(Qt.WA_TransparentForMouseEvents)
@@ -67,11 +67,15 @@ class GetVector3FloatWidget(base.BaseWidget, object):
         self._x_spinbox = spinbox.DragDoubleSpinBoxLineAxis(axis='x', min=-9999, max=9999, parent=self)
         self._y_spinbox = spinbox.DragDoubleSpinBoxLineAxis(axis='y', min=-9999, max=9999, parent=self)
         self._z_spinbox = spinbox.DragDoubleSpinBoxLineAxis(axis='z', min=-9999, max=9999, parent=self)
+        self._x_spinbox.setMaximumWidth(qtutils.dpi_scale(70))
+        self._y_spinbox.setMaximumWidth(qtutils.dpi_scale(70))
+        self._z_spinbox.setMaximumWidth(qtutils.dpi_scale(70))
 
         self.main_layout.addWidget(self._label)
         self.main_layout.addWidget(self._x_spinbox)
         self.main_layout.addWidget(self._y_spinbox)
         self.main_layout.addWidget(self._z_spinbox)
+        self.main_layout.addStretch()
 
     def get_value(self):
         return [self._x_spinbox.value(), self._y_spinbox.value(), self._z_spinbox.value()]

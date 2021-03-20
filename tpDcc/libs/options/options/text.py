@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import
 from Qt.QtCore import Qt, Signal
 from Qt.QtWidgets import QSizePolicy, QLineEdit
 
-import tpDcc as tp
+from tpDcc import dcc
 from tpDcc.libs.qt.core import base
 from tpDcc.libs.qt.widgets import layouts, label, buttons, lineedit
 
@@ -162,11 +162,13 @@ class TextWidget(base.BaseWidget, object):
         for sub in list_or_tuple:
             new_list.append(str(sub))
 
+        return new_list
+
     def _on_button_command(self):
         if self._suppress_button_command:
             return
 
-        if tp.is_maya():
+        if dcc.client().is_maya():
             import maya.cmds as cmds
             selection = cmds.ls(sl=True)
             if len(selection) > 1:

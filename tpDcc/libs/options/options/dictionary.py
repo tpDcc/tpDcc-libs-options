@@ -76,7 +76,7 @@ class GetDictWidget(base.BaseWidget, object):
     def set_value(self, dictionary):
         keys = self._order
         if not keys:
-            keys = dictionary.keys()
+            keys = list(dictionary.keys())
             keys.sort()
         for key in keys:
             self._dict_widget.add_entry(key, dictionary[key])
