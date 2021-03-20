@@ -74,13 +74,13 @@ class OptionList(QGroupBox, object):
         super(OptionList, self).mousePressEvent(event)
 
     def setup_ui(self):
-        self.main_layout = layouts.VerticalLayout(spacing=5, margins=(5, 5, 5, 5))
+        self.main_layout = layouts.VerticalLayout(spacing=0, margins=(0, 0, 0, 0))
         self.setLayout(self.main_layout)
 
-        self.child_layout = layouts.VerticalLayout(spacing=5, margins=(5, 5, 5, 5))
+        self.child_layout = layouts.VerticalLayout(spacing=0, margins=(0, 0, 0, 0))
         self.child_layout.setAlignment(Qt.AlignTop)
         self.main_layout.addLayout(self.child_layout)
-        self.main_layout.addSpacing(30)
+        self.main_layout.addSpacing(5)
 
     def get_option_object(self):
         """
